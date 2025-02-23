@@ -12,7 +12,7 @@ clear
 
  dom=$(curl -s $dominio'/wp-json'| echo $?);
 
-if [[ $checkpoint -eq 0 && $dom -eq 0 ]]; then
+     if [[ $checkpoint -eq 0 && $dom -eq 0 ]]; then
 
         echo -e "[OK] - É wordpress ✓"
         echo $dominio
@@ -23,6 +23,6 @@ if [[ $checkpoint -eq 0 && $dom -eq 0 ]]; then
         cat wpusersfound
         rm -f body
         echo -e "\nOutput Filename:" $(pwd)"/wpusersfound\n\n"
-else
+     else
         echo -e "[ERROR] - Dominio informado nao é wordpress ×"
-fi
+     fi
