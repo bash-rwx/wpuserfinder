@@ -1,0 +1,20 @@
+#!/bin/bash                                                             echo "Digite o Dominio:"            read dominio                        clear                               echo -e "...Por favor Aguarde...\n";
+
+checkpoint=$(curl -s -L -D headers $dominio'/wp-json/wp/v2/users' -o body > /dev/null; grep wp-json body | sed 's@\\/@/@g' | grep "\[{\"" >/dev/null ; echo $?);
+
+dom=$(curl -s $dominio'/wp-json'| echo $?);
+
+if [[ $checkpoint -eq 0 && $dom -eq 0 ]]; then
+
+        echo -e "[OK] - É wordpress ✓"
+        echo $dominio
+                curl -L -s $dominio'/wp-json/wp/v2/users' | sed 's@\"slug@\nslug@g' | cut -d ',' -f1 | grep slug | cut -d '"' -f3 > wpusersfound
+
+        cat wpusersfound | wc | awk -F " " '{print "[WP_Users] Found: "$1}'
+        echo -e "Usuarios Encontrados:\n"
+        cat wpusersfound
+        rm -f body
+        echo -e "\nOutput Filename:" $(pwd)"/wpusersfound\n\n"
+else
+        echo -e "[ERROR] - Dominio informado nao é wordpress ×"
+fi
