@@ -1,6 +1,6 @@
 # wpuserfinder
 
-SimpleUse a bash tool for WP Users Mapping.
+A simple bash tool for WP Users List/Find.
 
 
 Give perm to script;
