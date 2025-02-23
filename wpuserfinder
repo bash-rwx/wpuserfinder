@@ -2,7 +2,7 @@
 
 echo "Digite o Dominio:"            
 read dominio                        
-
+echo "" > body
 clear                               
      
       echo -e "...Por favor Aguarde...\n";
@@ -16,12 +16,12 @@ clear
 
         echo -e "[OK] - É wordpress ✓"
         echo $dominio
-                curl -L -s $dominio'/wp-json/wp/v2/users' | sed 's@\"slug@\nslug@g' | cut -d ',' -f1 | grep slug | cut -d '"' -f3 > wpusersfound
+                
+          curl -L -s $dominio'/wp-json/wp/v2/users' | sed 's@\"slug@\nslug@g' | cut -d ',' -f1 | grep slug | cut -d '"' -f3 > wpusersfound
 
         cat wpusersfound | wc | awk -F " " '{print "[WP_Users] Found: "$1}'
         echo -e "Usuarios Encontrados:\n"
         cat wpusersfound
-        rm -f body
         echo -e "\nOutput Filename:" $(pwd)"/wpusersfound\n\n"
      else
         echo -e "[ERROR] - Dominio informado nao é wordpress ×"
