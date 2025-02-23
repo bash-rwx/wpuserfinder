@@ -1,8 +1,16 @@
-#!/bin/bash                                                             echo "Digite o Dominio:"            read dominio                        clear                               echo -e "...Por favor Aguarde...\n";
+#!/bin/bash                                                             
 
-checkpoint=$(curl -s -L -D headers $dominio'/wp-json/wp/v2/users' -o body > /dev/null; grep wp-json body | sed 's@\\/@/@g' | grep "\[{\"" >/dev/null ; echo $?);
+echo "Digite o Dominio:"            
+read dominio                        
 
-dom=$(curl -s $dominio'/wp-json'| echo $?);
+clear                               
+     
+      echo -e "...Por favor Aguarde...\n";
+
+
+ checkpoint=$(curl -s -L -D headers $dominio'/wp-json/wp/v2/users' -o body > /dev/null; grep wp-json body | sed 's@\\/@/@g' | grep "\[{\"" >/dev/null ; echo $?);
+
+ dom=$(curl -s $dominio'/wp-json'| echo $?);
 
 if [[ $checkpoint -eq 0 && $dom -eq 0 ]]; then
 
